@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.statics.findAndValidate = async function(regno,password){
+    console.log("Received regno:", regno);
+    console.log("Received password:", password);
     const userDetail = await this.findOne({regno});
     if (!userDetail) return false;
     const validpassword = await bcrypt.compare(password,userDetail.password)

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const User = require('./models/user')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
@@ -14,6 +15,17 @@ mongoose.connect('mongodb+srv://harishvijayan2003:fallguy1903@cluster0.mgsf23r.m
     })}
 )
 
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB:', mongoose.connection.host);
+    console.log('Using Database:', mongoose.connection.name);
+});
+
+
+app.use(cors({
+    origin: 'http://localhost:5173' // 
+  }));
+  app.use(express.json());
+
 app.set('view engine','ejs');
 app.set('views','views');
 
@@ -25,6 +37,7 @@ const requireLogin = (req,res,next)=>{
 }
 app.use(session({secret:'notagoodsecret'}))
 app.use(express.urlencoded({extended:true}));
+
 app.get('/',(req,res)=>{
     res.send("hey there!")
 })
@@ -33,6 +46,7 @@ app.get('/register',(req,res)=>{
 })
 app.post('/register', async(req,res)=>{
     const {password,username,regno} = req.body;
+    console.log(username)
     const hash = await bcrypt.hash(password, 12);
     const user = new User({
         username,
@@ -40,22 +54,23 @@ app.post('/register', async(req,res)=>{
         password:hash
     })
     await user.save();
-    req.session.user_id = user._id;
-    res.redirect('/');
+    console.log()
+    res.json({valid:true})
 })
 app.get('/login',(req,res)=>{
     res.render('login')
 })
 app.post('/login',async (req,res)=>{
     const {regno,password} = req.body;
+    console.log(regno,password)
     const user = await User.findAndValidate(regno,password);
     
     if(user){
         req.session.user_id = user._id;
-        res.redirect('/secret');
+        res.json({user})
     }
     else
-        res.render("login");
+        res.json({user:'null'})
 })
 app.post('/logout',(req,res)=>{
     req.session.user_id = null;
