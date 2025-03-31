@@ -42,6 +42,7 @@ function Login() {
           <input type='password' name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='passowrd'></input>
           <button type="submit">Login</button>
         </form>
+        <a href='/signup'>Signup</a>
         
     </>
   )
