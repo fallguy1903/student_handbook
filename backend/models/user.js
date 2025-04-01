@@ -12,12 +12,19 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,'Password cannot be blank']
+    },
+    department:{
+        type:String,
+        required:[true,'Department cannot be blank']
+    },
+    batch:{
+        type:String,
+        required:[true,'Batch cannot be blank']
     }
 })
 
 userSchema.statics.findAndValidate = async function(regno,password){
-    console.log("Received regno:", regno);
-    console.log("Received password:", password);
+    
     const userDetail = await this.findOne({regno});
     if (!userDetail) return false;
     const validpassword = await bcrypt.compare(password,userDetail.password)

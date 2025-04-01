@@ -31,9 +31,9 @@ function Login() {
           console.log(data.user.username)
           navigate("/home", { state: { user: data.user } } );
         }
-    
-    
   }
+
+  
   return (
     <>
         <h1>Login Page</h1>

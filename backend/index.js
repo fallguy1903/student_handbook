@@ -4,16 +4,49 @@ const cors = require('cors');
 const User = require('./models/user')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const session = require('express-session')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-mongoose.connect('mongodb+srv://harishvijayan2003:fallguy1903@cluster0.mgsf23r.mongodb.net/student_webbook?retryWrites=true&w=majority&appName=Cluster0')
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cors({
+    origin: 'http://localhost:5173' 
+}));
+
+
+const generateToken = (user)=>{
+    return jwt.sign({id:user._id,regno:user.regno},process.env.JWT_SECRET,{
+        expiresIn:'1h',
+    })
+}
+
+const requireLogin = (req,res,next)=>{
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+    if(!token)
+        return res.status(401).json({message:"unauthorized"})
+    try{
+        const verified_token = jwt.verify(token,process.env.JWT_SECRET);
+        req.user = verified_token;
+        next();
+    }
+    catch (err){
+        res.status(404).json({message:"Forbidden"});
+    }
+};
+
+mongoose.connect(process.env.MONGO_URI)
 .then((res)=>
     {
         app.listen(3000,()=>{
         console.log("Running on port 3000")
     })}
 )
+.catch(err =>{
+    console.log(err);
+})
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB:', mongoose.connection.host);
@@ -21,63 +54,54 @@ mongoose.connection.once('open', () => {
 });
 
 
-app.use(cors({
-    origin: 'http://localhost:5173' // 
-  }));
-  app.use(express.json());
-
-app.set('view engine','ejs');
-app.set('views','views');
-
-
-const requireLogin = (req,res,next)=>{
-    if(!req.session.user_id)
-        return res.redirect('/login')
-    next();
-}
-app.use(session({secret:'notagoodsecret'}))
-app.use(express.urlencoded({extended:true}));
-
-app.get('/',(req,res)=>{
-    res.send("hey there!")
-})
-app.get('/register',(req,res)=>{
-    res.render('register')
-})
 app.post('/register', async(req,res)=>{
-    const {password,username,regno} = req.body;
-    console.log(username)
+    const {password,username,regno,department,batch} = req.body;
+    if (!password || !username || !regno || !batch ||!department) {
+         res.status(400).json({ message: 'All fields are required.' });
+    }
+    const existingUser = await User.findOne({ regno });
+        if (existingUser) {
+            res.status(400).json({ message: 'User with this registration number already exists.' });
+        }
+    
     const hash = await bcrypt.hash(password, 12);
     const user = new User({
         username,
         regno,
-        password:hash
+        password:hash,
+        batch,
+        department
     })
     await user.save();
-    console.log()
-    res.json({valid:true})
+    
+    res.json({valid:true,message:"User Registerd Successfully",user:{username,regno,batch,department}})
 })
-app.get('/login',(req,res)=>{
-    res.render('login')
-})
+
 app.post('/login',async (req,res)=>{
     const {regno,password} = req.body;
     console.log(regno,password)
     const user = await User.findAndValidate(regno,password);
     
     if(user){
-        req.session.user_id = user._id;
-        res.json({user})
+        token = generateToken(user);
+
+        res.cookie("token", token, {
+            httpOnly: true,  
+            secure: process.env.NODE_ENV === "production",  
+            sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax"  
+        });
+        
+        
+         res.json({message:"login successfull",token,user})
     }
     else
-        res.json({user:'null'})
+     res.status(400).json({user:'null', message: "Invalid credentials" });
 })
-app.post('/logout',(req,res)=>{
-    req.session.user_id = null;
-    res.redirect('login');
-})
-app.get('/secret',requireLogin,(req,res)=>{
-        
-        res.render('secret')
-})
+
+
+app.post('/logout', (req, res) => {
+    res.clearCookie("token");
+    res.json({ message: "Logged out successfully" });
+});
+
 

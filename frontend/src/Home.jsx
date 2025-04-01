@@ -5,6 +5,6 @@ export default function Home(){
     
     return(
         
-        <div>Home Page, Welcome {location.state.user.username}</div>
+        <div>Home Page, Welcome {location.state.user.username + '_' + location.state.user.batch}</div>
     )
 }

@@ -7,6 +7,8 @@ export default function SignUp(){
     const[username,setUsername] = useState('');
     const[password,setPassword] = useState('');
     const[regno,setRegno] = useState('');
+    const[department,setDepartment] = useState('');
+    const[batch,setBatch] = useState('');
     const navigate = useNavigate();
     async function handleSubmit(e)
     {
@@ -15,16 +17,16 @@ export default function SignUp(){
         const response = await fetch('http://localhost:3000/register',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({regno,username,password})
+            body:JSON.stringify({regno,username,password,department,batch})
         })
         const data = await response.json();
 
-        if(data)
+        if(data.valid)
         {
-            console.log("register successfull")
-            navigate("/home", { state: { user: {username: username} } } );
+            console.log(data.message)
+            navigate("/home", { state: { user: {username,batch} } } );
         }
-        else    console.log("Not successfull")
+        else    console.log(data.message)
     }
     return(
         <>
@@ -33,6 +35,8 @@ export default function SignUp(){
                 <input type="text" placeholder='username' onChange={(e)=>setUsername(e.target.value)} value={username} />
                 <input type="text" placeholder='Password' onChange={(e)=>setPassword(e.target.value)} value={password} />
                 <input type="text" placeholder='regno' onChange={(e)=>setRegno(e.target.value)} value={regno} />
+                <input type="text" placeholder='department' onChange={(e)=>setDepartment(e.target.value)} value={department} />
+                <input type="text" placeholder='batch' onChange={(e)=>setBatch(e.target.value)} value={batch} />
                 <button>Register</button>
             </form>
         </>
