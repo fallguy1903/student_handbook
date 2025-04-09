@@ -13,4 +13,7 @@ router.get('/post/:postId', isAuth, postController.getPost);
 // post POST
 router.post('/post', isAuth, postController.postPost);
 
+// post DELETE
+router.delete('/post/:postId', isAuth, postController.deletePost);
+
 module.exports = router;

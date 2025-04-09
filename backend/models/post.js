@@ -17,7 +17,11 @@ const postSchema = new mongoose.Schema({
     date: {
         type: Date, 
         required: true 
-    }
+    },
+    imageUrl: {
+        type: String, 
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Post', postSchema);

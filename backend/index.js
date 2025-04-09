@@ -1,6 +1,10 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+const cors = require('cors')
 require('dotenv').config();
 
 const userRoutes = require('./routes/user');
@@ -9,17 +13,27 @@ const postRoutes = require('./routes/post');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors())
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, uuidv4() + path.extname(file.originalname))
+    }
+});
 
-// CORS Headers set manually without cors package
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS'); 
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true'); 
-    next();
-  });
+const fileFilter = (req, file, cb) => {
+    const extn = path.extname(file.originalname);
+    if(extn !== '.png' && extn !== '.jpg' && extn !== '.gif' && extn !== '.jpeg') 
+        cb(null, false);
+    else
+        cb(null, true);
+}
 
+app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 
 // Error handler, set error.status = NUM and next(error) in the catch block (you can also throw error in the try block)
 app.use((error, req, res, next) => {
