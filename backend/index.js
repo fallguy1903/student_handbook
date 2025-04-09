@@ -1,68 +1,40 @@
 const express = require('express');
-const app = express();
-const User = require('./models/user')
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const session = require('express-session')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config();
 
-app.set('view engine','ejs');
-app.set('views','views');
+const userRoutes = require('./routes/user');
+// const postRoutes = require('./routes/post');
+
+const app = express();
+
+app.use(bodyParser.json());
 
 
-const requireLogin = (req,res,next)=>{
-    if(!req.session.user_id)
-        return res.redirect('/login')
+// CORS Headers set manually without cors package
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS'); 
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true'); 
     next();
-}
-app.use(session({secret:'notagoodsecret'}))
-app.use(express.urlencoded({extended:true}));
-app.get('/',(req,res)=>{
-    res.send("hey there!")
+  });
+
+
+// Error handler, set error.status = NUM and next(error) in the catch block (you can also throw error in the try block)
+app.use((error, req, res, next) => {
+    console.log(error);
+    res.status(error.status || 500).json({msg: error.message})
 })
-app.get('/register',(req,res)=>{
-    res.render('register')
-})
-app.post('/register', async(req,res)=>{
-    const {password,username,regno} = req.body;
-    const hash = await bcrypt.hash(password, 12);
-    const user = new User({
-        username,
-        regno,
-        password:hash
-    })
-    await user.save();
-    req.session.user_id = user._id;
-    res.redirect('/');
-})
-app.get('/login',(req,res)=>{
-    res.render('login')
-})
-app.post('/login',async (req,res)=>{
-    const {regno,password} = req.body;
-    const user = await User.findAndValidate(regno,password);
-    
-    if(user){
-        req.session.user_id = user._id;
-        res.redirect('/secret');
-    }
-    else
-        res.render("login");
-})
-app.post('/logout',(req,res)=>{
-    req.session.user_id = null;
-    res.redirect('login');
-})
-app.get('/secret',requireLogin,(req,res)=>{
+
+app.use(userRoutes);
+// app.use(postRoutes);
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(result => {
+        app.listen(3000);
+        console.log('Server running on PORT 3000');
         
-        res.render('secret')
-})
-
-mongoose.connect('mongodb+srv://harishvijayan2003:fallguy1903@cluster0.mgsf23r.mongodb.net/student_webbook?retryWrites=true&w=majority&appName=Cluster0')
-.then((res)=>
-    {
-        app.listen(3000,()=>{
-        console.log("Running on port 3000")
-    })}
-)
-
+    })
+    .catch(err => console.log(err));
+    
