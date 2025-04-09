@@ -6,14 +6,6 @@ const bcrypt = require('bcrypt');
 const session = require('express-session')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-mongoose.connect('mongodb+srv://harishvijayan2003:fallguy1903@cluster0.mgsf23r.mongodb.net/student_webbook?retryWrites=true&w=majority&appName=Cluster0')
-.then((res)=>
-    {
-        app.listen(3000,()=>{
-        console.log("Running on port 3000")
-    })}
-)
-
 app.set('view engine','ejs');
 app.set('views','views');
 
@@ -65,4 +57,12 @@ app.get('/secret',requireLogin,(req,res)=>{
         
         res.render('secret')
 })
+
+mongoose.connect('mongodb+srv://harishvijayan2003:fallguy1903@cluster0.mgsf23r.mongodb.net/student_webbook?retryWrites=true&w=majority&appName=Cluster0')
+.then((res)=>
+    {
+        app.listen(3000,()=>{
+        console.log("Running on port 3000")
+    })}
+)
 
