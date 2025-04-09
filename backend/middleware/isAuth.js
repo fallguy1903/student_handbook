@@ -8,12 +8,12 @@ module.exports = (req, res, next) => {
         throw error; 
     }
     // const token = authHeader.split(' ')[1];
-    const token = req.cookies.token || authHeader.split(" ")[1];
+    const token = authHeader.split(" ")[1] || req.cookies.token;
     console.log(token);
     
     let decoded;
     try{
-        decoded = jwt.verify(token, '837reubfdmnbjhjki8fee8rndoay3');
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
     }
     catch(error){
         error.message = 'Failed to verify';
@@ -25,6 +25,6 @@ module.exports = (req, res, next) => {
         error.status = 401;
         throw error;
     }
-    req.userId = decoded.userId;
+    req.userId = decoded.id;
     next();
 }

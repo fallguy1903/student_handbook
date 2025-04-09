@@ -43,7 +43,7 @@ exports.postLogin = async (req, res, next) => {
         }, 
         process.env.JWT_SECRET, { expiresIn: '1h' });
         
-        res.json({msg: 'Login Success: ' + user._id, token: token});
+        res.json({msg: 'Login Success: ' + user._id, token: token, user: user});
     }
     catch(error){
         next(error);

@@ -25,7 +25,8 @@ function Login() {
     }
     else{
       console.log(data.user.username)
-      navigate("/home", { state: { token: data.token } } );
+      localStorage.setItem("token", data.token);
+      navigate("/home", { state: { token: data.token, user: data.user } } );
     }
   }
 

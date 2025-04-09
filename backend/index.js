@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const userRoutes = require('./routes/user');
-// const postRoutes = require('./routes/post');
+const postRoutes = require('./routes/post');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.use((error, req, res, next) => {
 })
 
 app.use(userRoutes);
-// app.use(postRoutes);
+app.use(postRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(result => {
