@@ -7,33 +7,35 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors')
 require('dotenv').config();
 
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
+//const userRoutes = require('./routes/user');
+//const postRoutes = require('./routes/post');
+const notesRoutes = require("./routes/notesRoutes");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors())
-app.use('/images', express.static(path.join(__dirname, '/images')));
+//app.use('/images', express.static(path.join(__dirname, '/images')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-const fileStorage = multer.diskStorage({
+/*const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
         cb(null, uuidv4() + path.extname(file.originalname))
     }
-});
+});*/
 
-const fileFilter = (req, file, cb) => {
+/*const fileFilter = (req, file, cb) => {
     const extn = path.extname(file.originalname);
     if(extn !== '.png' && extn !== '.jpg' && extn !== '.gif' && extn !== '.jpeg') 
         cb(null, false);
     else
         cb(null, true);
-}
+}*/
 
-app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
+//app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 
 // Error handler, set error.status = NUM and next(error) in the catch block (you can also throw error in the try block)
 app.use((error, req, res, next) => {
@@ -41,8 +43,9 @@ app.use((error, req, res, next) => {
     res.status(error.status || 500).json({msg: error.message})
 })
 
-app.use(userRoutes);
-app.use(postRoutes);
+//app.use(userRoutes);
+//app.use(postRoutes);
+app.use("/api/notes", notesRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(result => {
