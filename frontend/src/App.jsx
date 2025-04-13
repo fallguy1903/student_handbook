@@ -4,6 +4,8 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Post from './Post';
 import PostPage from './PostPage'
+import Feedback from './Feedback';
+import Feedbacks from './Feedbacks';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/post" element={<Post />} />
         <Route path="/post/:id" element={<PostPage />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/feedbacks" element={<Feedbacks />} />
         </Routes>
     </Router>
   );

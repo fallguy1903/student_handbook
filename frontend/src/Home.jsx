@@ -9,6 +9,7 @@ export default function Home(){
             Home Page, Welcome {location.state.user.username + '_' + location.state.user.batch}
             <p>
                 <Link to={"/post"}>E V E N T S</Link>
+                <Link to={"/feedback"}> Feedback</Link>
             </p>
         </div>
     )
