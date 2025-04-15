@@ -6,6 +6,7 @@ import Post from './Post';
 import PostPage from './PostPage'
 import Feedback from './Feedback';
 import Feedbacks from './Feedbacks';
+import Gpa_Calculator from './GPA_Calulator';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/post/:id" element={<PostPage />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/feedbacks" element={<Feedbacks />} />
+        <Route path="/Gpa_Calculator" element={<Gpa_Calculator />} />
         </Routes>
     </Router>
   );

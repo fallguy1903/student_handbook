@@ -1,0 +1,31 @@
+Modules:-
+1)Attendance
+2)Home Page with Nav(Event's announcement)
+3)Time Table
+4)SignOut(H)
+5)LOGIN/SIGNUP(H)
+
+Functionalities:-
+1)Attendance
+2)Time Table(H)
+3)Events
+4)Notes sharing && Assignment tracking
+5)GPA Calculator
+6)FeedBack(H)
+7)Academic calendar
+
+Schema:-
+user -    regno,username,email,password,department,batch,sem,subject[{subcode,grade,IA1,IA2,ILAB,SLAB,SEM,attend_perc}].
+timeTable - DayOrder[subjects[1..8]],sem,dept,
+subject - subcode,subname,department[],credits,sem,weightage{IA1,IA2,ILAB,SLAB,SEM}
+attendance - regno,satt[subcodes:{isPresent}],time_stamp
+events -  EventName, Image, Description, Author
+feedback - regno,feedback,time_stamp
+assignment - regno,ass_name,DOS,
+
+
+MOn - fsd{   }
+ADS,
+tue 
+
+[1:{isPresent},2,3]

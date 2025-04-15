@@ -10,6 +10,7 @@ export default function Home(){
             <p>
                 <Link to={"/post"}>E V E N T S</Link>
                 <Link to={"/feedback"}> Feedback</Link>
+                <Link to={"/Gpa_Calculator"}> Mark details</Link>
             </p>
         </div>
     )
