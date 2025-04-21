@@ -1,48 +1,51 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import './App.css'
+import './login.css';
 
 function Login() {
   const [regno, setRegno] = useState('');
-  const [password,setPassword] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
-  const handleLogin = async (evt)=>{
+  const handleLogin = async (evt) => {
     evt.preventDefault();
-    console.log(JSON.stringify({regno,password}))
-    const response = await fetch('http://localhost:3000/login',{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({regno,password})
-    })
-    
+    const response = await fetch('http://localhost:3000/login', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ regno, password })
+    });
+
     const data = await response.json();
-    if(data.user == 'null'){
-      console.log("Incorrect Credentials")
+    if (data.user === 'null') {
+      setError("Incorrect credentials");
       setRegno("");
       setPassword("");
-      navigate("/");
-    }
-    else{
-      console.log(data.user.username)
+    } else {
       localStorage.setItem("token", data.token);
-      navigate("/home", { state: { token: data.token, user: data.user } } );
+      navigate("/home", { state: { token: data.token, user: data.user } });
     }
   }
 
-  
   return (
-    <>
-        <h1>Login Page</h1>
-          <form onSubmit={handleLogin}>
-          <input type='text' name='regno' onChange={(e)=>setRegno(e.target.value)} value={regno} placeholder='regno'></input>
-          <input type='password' name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='passowrd'></input>
-          <button type="submit">Login</button>
-        </form>
-        <a href='/signup'>Signup</a>
-        
-    </>
-  )
+    <div className="page-container">
+      <div className="image-container"></div>
+      <div className="form-container">
+        <div className="form-wrapper">
+          <h1 className="login-title">Login</h1>
+          <form onSubmit={handleLogin} className="login-form">
+            <input type='text' name='regno' placeholder='Registration Number'
+              onChange={(e) => setRegno(e.target.value)} value={regno} autoComplete="off" />
+            <input type='password' name='password' placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)} value={password} autoComplete="off" />
+            <button type="submit">Login</button>
+            {error && <p className="error-text">{error}</p>}
+            <a href='/signup' className="signup-link">Signup</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

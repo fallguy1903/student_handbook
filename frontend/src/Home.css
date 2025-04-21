@@ -1,0 +1,100 @@
+/* Apply base styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: white; /* Set white background */
+    display: flex; /* Ensure full height */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100vw; /* Ensure the page takes up the full viewport width */
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  /* Container that fills the viewport and centers content */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Ensure the container fills the width */
+    padding: 20px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+  }
+  
+  /* Page title */
+  .home-title {
+    margin-bottom: 40px;
+    color: #007dbd;
+    font-size: 2.5rem;
+  }
+  
+  /* Grid layout */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+    gap: 40px;
+    justify-items: center;
+    align-items: center;
+    max-width: 100%; /* Prevents overflow */
+    width: 100%; /* Ensure the grid container stretches full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  /* Grid items (cards) */
+  .grid-item {
+    background-color: #0092d1;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .grid-item:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Icon styles */
+  .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+      gap: 20px;
+    }
+  
+    .grid-item {
+      width: 130px;
+      height: 130px;
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+  
+    .home-title {
+      font-size: 2rem; /* Smaller title font */
+    }
+  
+    .grid-item {
+      width: 100%;
+      max-width: 250px; /* Max width for grid items */
+    }
+  }
+  

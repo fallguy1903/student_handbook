@@ -1,0 +1,112 @@
+/* Apply base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Full viewport height */
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e1e; /* Dark background for the whole page */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.page-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh; /* Full viewport height */
+}
+
+.image-container {
+  flex: 1;
+  background-image: url('/login.jpg'); /* This assumes the image is inside /public */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.form-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  color: #111;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form input,
+.login-form select,
+.login-form button {
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.login-form input,
+.login-form select {
+  background-color: #f0f0f0;
+  outline: none;
+  color: #333;
+}
+
+.login-form input:focus,
+.login-form select:focus {
+  border-color: #333;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  transform: scale(1.02);
+}
+
+.login-form button {
+  background-color: #111;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #333;
+}
+
+.signup-link {
+  color: #333;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+}

@@ -1,80 +1,84 @@
-import {useState,useEffect} from 'react';
+import './GPA_Calculator.css';
 
-export default function Gpa_Calculator(){
-    let tot_credit = 0, gpa = 0;
-    const [subjects,setSubjects] = useState([{subcode:"CA3101",subname:"FSD",ia:0,sem:0,grade:'',credits:4.5},{subcode:"CA3102",subname:"IOT",ia:0,sem:0,grade:'',credits:4}])
-    const [IAmark,setIAmark] = useState(0)
-    const [semmark,setsemmark] = useState(0)
-    
-    const update_IA = (index, value) => {
-        const newSubjects = [...subjects];
-        newSubjects[index].ia = parseFloat(value) || 0;
-        setSubjects(newSubjects);
-    };
-    
-    const update_Sem = (index, value) => {
-        const newSubjects = [...subjects];
-        newSubjects[index].sem = parseFloat(value) || 0;
-        setSubjects(newSubjects);
-    };
-    
-    const update_grade = (index,value) =>{
-        const newSubjects = [...subjects];
-        newSubjects[index].grade = value;
-        setSubjects(newSubjects);
+export default function Gpa_Calculator({ subjects, setSubjects }) {
+  const update_IA = (index, value) => {
+    const newSubjects = [...subjects];
+    newSubjects[index].ia = parseFloat(value) || 0;
+    setSubjects(newSubjects);
+  };
+
+  const update_Sem = (index, value) => {
+    const newSubjects = [...subjects];
+    newSubjects[index].sem = parseFloat(value) || 0;
+    setSubjects(newSubjects);
+  };
+
+  const update_grade = (index, value) => {
+    const newSubjects = [...subjects];
+    newSubjects[index].grade = value;
+    setSubjects(newSubjects);
+  };
+
+  const calculate_gpa = () => {
+    let total_credits = 0;
+    let total_points = 0;
+
+    for (let sub of subjects) {
+      if (sub.ia === 0 || sub.sem === 0 || sub.grade === '') {
+        alert("Please fill all details.");
+        return;
+      }
+
+      let points = 0;
+      if (sub.grade === 'o') points = 10;
+      else if (sub.grade === 'a+') points = 9;
+      else if (sub.grade === 'a') points = 8;
+      else if (sub.grade === 'b+') points = 7;
+      else if (sub.grade === 'b') points = 6;
+
+      total_credits += sub.credits;
+      total_points += points * sub.credits;
     }
 
-    const calculate_gpa = () =>{
-        console.log("Calculating CGPA...")
-        let gpa = 0;
-        let points = 0;
-        subjects.map((sub)=>{
-            if(sub.ia==0 || sub.sem==0)
-                return <p>Enter all the marks to calculate GPA</p>
-            else
-            {
-                
-                tot_credit+=sub.credits;
-                if(sub.grade=='o')  points = 10
-                else if(sub.grade=='a+') points = 9
-                else if(sub.grade=='a') points = 8
-                else if(sub.grade=='b+') points = 7
-                else if(sub.grade=='b') points = 6
-                else points = -1;  
-            }
-            gpa+=points*sub.credits;
-        })
-        console.log("Total Credits:",tot_credit)
-        gpa/=tot_credit;
-        subjects.map((value)=>{
-            console.log("IA:",value.ia,"sem:",value.sem,"grade:",value.grade)
-        })
-        console.log("GPA is:",gpa)
-    }
-    return(
-        <>
-            <h1>Mark Details</h1>
-            {subjects.map((sub, index) => (
-                <div key={index}>
-                    <p>{sub.subname}</p>
-                    <input 
-                        type="number" 
-                        placeholder='Enter IA mark' 
-                        onChange={(e) => update_IA(index, e.target.value)} 
-                    />
-                    <input 
-                        type="number" 
-                        placeholder='Enter Sem mark' 
-                        onChange={(e) => update_Sem(index, e.target.value)} 
-                    />
-                    <input
-                        type="text"
-                        placeholder='Enter Grade Acquired'
-                        onChange={(e)=> update_grade(index,e.target.value)}
-                    />
-                </div>
-            ))}
-            <br /><br/><button onClick={calculate_gpa}>Calculate GPA</button>
-        </>
-    )
+    const gpa = (total_points / total_credits).toFixed(2);
+    alert(`Your GPA is: ${gpa}`);
+  };
+
+  return (
+    <div className="gpa-container">
+      <h2 className="gpa-title">Enter Scores</h2>
+      {subjects.map((sub, index) => (
+        <div className="subject-card" key={index}>
+          <p className="subject-name">{sub.subname}</p>
+          <input
+            className="gpa-input"
+            type="text"
+            placeholder="Enter IA mark"
+            value={sub.ia}
+            onChange={(e) => update_IA(index, e.target.value)}
+          />
+          <input
+            className="gpa-input"
+            type="text"
+            placeholder="Enter Sem mark"
+            value={sub.sem}
+            onChange={(e) => update_Sem(index, e.target.value)}
+          />
+          <select
+            className="gpa-select"
+            value={sub.grade}
+            onChange={(e) => update_grade(index, e.target.value)}
+          >
+            <option value="">Select Grade</option>
+            <option value="o">O</option>
+            <option value="a+">A+</option>
+            <option value="a">A</option>
+            <option value="b+">B+</option>
+            <option value="b">B</option>
+          </select>
+        </div>
+      ))}
+      <button className="gpa-button" onClick={calculate_gpa}>Calculate GPA</button>
+    </div>
+  );
 }
