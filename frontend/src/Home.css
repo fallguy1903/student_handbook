@@ -1,17 +1,16 @@
-/* Apply base styles */
-body, html {
+
+  .whole{
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
     font-family: 'Segoe UI', sans-serif;
-    background-color: white; /* Set white background */
-    display: flex; /* Ensure full height */
+    background-color: black; /* Set white background */
+    background-image: url('/feedback.jpg');
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     width: 100vw; /* Ensure the page takes up the full viewport width */
     overflow: hidden; /* Prevent scrolling */
   }
-  
   /* Container that fills the viewport and centers content */
   .home-container {
     display: flex;

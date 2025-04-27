@@ -3,6 +3,7 @@ import "./Home.css"; // Import the CSS for styling
 
 export default function Home() {
   return (
+    <div className="whole">
     <div className="home-container">
       <h1 className="home-title">Welcome to Student Webbook</h1>
       <div className="grid-container">
@@ -31,6 +32,7 @@ export default function Home() {
           <p>Dummy 3</p>
         </Link>
       </div>
+    </div>
     </div>
   );
 }

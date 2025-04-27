@@ -1,0 +1,80 @@
+.feedbacks-container {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 30px; /* Added top padding instead of margin in heading */
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-y: auto;
+    background-image: url('/feedback.jpg');
+    background-size: cover; /* Makes background cover entire container */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.heading {
+    margin-top: 10; /* No extra margin-top */
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #333;
+}
+
+.feedbacks-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.feedback-item {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.feedback-item h3 {
+    margin: 0 0 10px 0;
+    color: #222;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.feedback-item p {
+    margin: 0 0 10px 0;
+    color: #555;
+    font-size: 15px;
+}
+
+.feedback-date {
+    font-size: 12px;
+    color: #888;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+.back-link {
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+.back-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

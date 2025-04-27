@@ -23,7 +23,7 @@ function Login() {
       setPassword("");
     } else {
       localStorage.setItem("token", data.token);
-      navigate("/home", { state: { token: data.token, user: data.user } });
+      navigate("/home", { state: { token: data.token, user: data.user } }); 
     }
   }
 
