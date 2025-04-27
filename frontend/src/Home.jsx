@@ -22,9 +22,9 @@ export default function Home() {
           <div className="icon">👤</div>
           <p>Dummy 1</p>
         </Link>
-        <Link to="#" className="grid-item">
+        <Link to="/notes" className="grid-item">
           <div className="icon">👨‍🏫</div>
-          <p>Dummy 2</p>
+          <p>Notes & Assignments</p>
         </Link>
         <Link to="#" className="grid-item">
           <div className="icon">🕒</div>
