@@ -1,18 +1,58 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Gpa_Calculator from './GPA_Calulator';
-import './Marks.css'; // Import the CSS
+import './GPA_Calculator.css';
 
 export default function Marks() {
-  const [subjects, setSubjects] = useState([
-    { subcode: "CA3101", subname: "FSD", ia: 0, sem: 0, grade: '', credits: 4.5 },
-    { subcode: "CA3102", subname: "IOT", ia: 0, sem: 0, grade: '', credits: 4 }
-  ]);
+  // Get user from localStorage (persisted after login)
+  const storedUser = localStorage.getItem('user');
+  const user = storedUser ? JSON.parse(storedUser) : null;
 
+  const [subjects, setSubjects] = useState([]);
   const [showCalculator, setShowCalculator] = useState(false);
+  const [semester, setSemester] = useState('1');
+
+  const fetchMarks = async (sem) => {
+    if (!user) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/marks/${user._id}?semester=${sem}`);
+      const data = await res.json();
+      if (res.ok) {
+        setSubjects(data.subjects || []);
+      } else {
+        setSubjects([]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch marks:", err);
+      setSubjects([]);
+    }
+  };
+
+  useEffect(() => {
+    if (user && semester) {
+      fetchMarks(semester);
+    }
+  }, [user, semester]);
+
+  if (!user) {
+    return <div className="marks-container"><h2>User not found. Please log in again.</h2></div>;
+  }
 
   return (
     <div className="marks-container">
       <h1 className="marks-title">Marks Summary</h1>
+
+      <label>Select Semester: </label>
+      <select
+        className="dropdown"
+        value={semester}
+        onChange={(e) => setSemester(e.target.value)}
+      >
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+        <option value="3">Semester 3</option>
+        <option value="4">Semester 4</option>
+      </select>
 
       <div className="subject-header">
         <span>Subject</span>
@@ -37,7 +77,13 @@ export default function Marks() {
       </button>
 
       {showCalculator && (
-        <Gpa_Calculator subjects={subjects} setSubjects={setSubjects} />
+        <Gpa_Calculator
+          subjects={subjects}
+          setSubjects={setSubjects}
+          user={user}
+          semester={semester}
+          refreshMarks={() => fetchMarks(semester)}
+        />
       )}
     </div>
   );

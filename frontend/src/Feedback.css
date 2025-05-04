@@ -15,6 +15,9 @@
     background-repeat: no-repeat;
     color: #273b45; /* darker text for better contrast */
 }
+h1{
+    margin-bottom: 50px;
+}
 
 .form {
     background: rgba(255, 255, 255, 0.15); /* Transparent white */

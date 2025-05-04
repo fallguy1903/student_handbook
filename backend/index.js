@@ -10,6 +10,8 @@ require('dotenv').config();
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const feedbackRoutes = require('./routes/feedback')
+const marksRoutes = require('./routes/mark');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -44,6 +46,7 @@ app.use((error, req, res, next) => {
 app.use(userRoutes);
 app.use(postRoutes);
 app.use(feedbackRoutes)
+app.use(marksRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(result => {

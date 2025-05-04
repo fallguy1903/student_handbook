@@ -56,7 +56,7 @@ export default function Feedbacks() {
           <p>No feedbacks available.</p>
         )}
       </ul>
-      <a href="/" className="back-link">
+      <a href="/home" className="back-link">
         <button className="back-button">Back</button>
       </a>
     </div>
