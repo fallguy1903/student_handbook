@@ -12,11 +12,22 @@ const postRoutes = require('./routes/post');
 const feedbackRoutes = require('./routes/feedback')
 const marksRoutes = require('./routes/mark');
 
+const subjectRoutes = require('./routes/subjectRoutes');
+const assignmentRoutes = require('./routes/assignmentRoutes');
+const completedRoutes = require('./routes/completedRoutes');
+const noteRoutes = require('./routes/noteRoutes');
+
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors())
 app.use('/images', express.static(path.join(__dirname, '/images')));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/subjects', subjectRoutes);
+app.use('/assignments', assignmentRoutes);
+app.use('/completed', completedRoutes);
+app.use('/notes', noteRoutes);
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {

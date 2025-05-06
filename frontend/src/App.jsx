@@ -8,7 +8,7 @@ import Feedback from './Feedback';
 import Feedbacks from './Feedbacks';
 import Gpa_Calculator from './Gpa_Calculator';
 import Marks from './Marks';
-import NotesDashboard from './Notes';
+import NotesAndAssignments from './NotesAndAssignments';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path="/feedbacks" element={<Feedbacks />} />
         <Route path="/Gpa_Calculator" element={<Gpa_Calculator />} />
         <Route path="/Marks" element={<Marks />}/>
-        <Route path="/notes" element={<NotesDashboard />}/>
+        <Route path="/assignments" element={<NotesAndAssignments />}/>
         </Routes>
     </Router>
   );

@@ -1,0 +1,15 @@
+#assignments-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60vh;
+    min-width: 30vw;
+  
+    border: 2px solid #ccc;                         /* Border around the whole div */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /* Shadow for depth */
+    padding: 20px;                                   /* Space inside the border */
+    margin: 20px auto;                               /* Center horizontally if not full width */
+    width: fit-content;                              /* Shrink to fit content */
+    border-radius: 10px;                             /* Optional: rounded corners */
+    background-color: #f9f9f9;                       /* Optional: light background */
+}

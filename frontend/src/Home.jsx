@@ -41,7 +41,7 @@ export default function Home() {
             <p>Dummy 1</p>
           </Link>
 
-          <Link to="/notes" className="grid-item">
+          <Link to="/assignments" state={{ username: user?.username }} className="grid-item">
             <div className="icon">👨‍🏫</div>
             <p>Notes & Assignments</p>
           </Link>

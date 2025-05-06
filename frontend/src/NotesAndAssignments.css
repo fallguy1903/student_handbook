@@ -1,0 +1,41 @@
+#na-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#assignment {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: black;        /* Nice green color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    
+  }
+  
+  #assignment:hover {
+    background-color: gold;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  #note {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: black;        /* Nice green color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    
+  }
+  
+  #note:hover {
+    background-color: gold;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
