@@ -6,7 +6,7 @@ import Post from './Post';
 import PostPage from './PostPage'
 import Feedback from './Feedback';
 import Feedbacks from './Feedbacks';
-import Gpa_Calculator from './GPA_Calulator';
+import Gpa_Calculator from './Gpa_Calculator';
 import Marks from './Marks';
 import NotesDashboard from './Notes';
 

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import Gpa_Calculator from './GPA_Calulator';
+import { useState, useEffect, useRef} from 'react';
+import Gpa_Calculator from './Gpa_Calculator';
 import './GPA_Calculator.css';
 
 export default function Marks() {
@@ -10,6 +10,7 @@ export default function Marks() {
   const [subjects, setSubjects] = useState([]);
   const [showCalculator, setShowCalculator] = useState(false);
   const [semester, setSemester] = useState('1');
+  const isEditing = useRef(false);
 
   const fetchMarks = async (sem) => {
     if (!user) return;
@@ -29,10 +30,11 @@ export default function Marks() {
   };
 
   useEffect(() => {
-    if (user && semester) {
+    if (user && semester && !isEditing.current) {
       fetchMarks(semester);
     }
   }, [user, semester]);
+  
 
   if (!user) {
     return <div className="marks-container"><h2>User not found. Please log in again.</h2></div>;
@@ -78,12 +80,18 @@ export default function Marks() {
 
       {showCalculator && (
         <Gpa_Calculator
-          subjects={subjects}
-          setSubjects={setSubjects}
-          user={user}
-          semester={semester}
-          refreshMarks={() => fetchMarks(semester)}
-        />
+        subjects={subjects}
+        setSubjects={(newSubjects) => {
+          isEditing.current = true; // mark editing
+          setSubjects(newSubjects);
+        }}
+        user={user}
+        semester={semester}
+        refreshMarks={() => {
+          isEditing.current = false; // mark editing done
+          fetchMarks(semester);
+        }}
+      />
       )}
     </div>
   );
