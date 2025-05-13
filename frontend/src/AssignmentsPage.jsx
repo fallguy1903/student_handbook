@@ -107,9 +107,6 @@ const AssignmentsPage = ({ username }) => {
 
     return (
         <div id="assignments-div" style={{ padding: '1rem' }}>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Assignments</h1>
-            <h3>for {user}</h3>
-
             {/* Assignment creation form */}
             <div style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'rgba(255, 255, 255, 0.05)', borderRadius: '0.5rem', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
                 <h2 style={{ fontSize: '1.2rem', fontWeight: 'semibold', marginBottom: '1rem' }}>Create New Assignment</h2>
@@ -169,14 +166,14 @@ const AssignmentsPage = ({ username }) => {
 
                     {errorMessage && <p style={{ color: '#F44336', fontSize: '0.875rem' }}>{errorMessage}</p>}
 
-                    <button type="submit" style={{ backgroundColor: '#3B82F6', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', cursor: 'pointer', transition: 'background-color 0.2s ease-in-out' }}>
+                    <button id='createButton' type="submit" style={{ backgroundColor: '#3B82F6', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '0.375rem', cursor: 'pointer', transition: 'background-color 0.2s ease-in-out' }}>
                         Create Assignment
                     </button>
                 </form>
             </div>
 
             {/* Assignments list */}
-            <div style={{ marginTop: '2rem' }}>
+            <div className="assignment-item" style={{ marginTop: '2rem' }}>
                 <h2 style={{ fontSize: '1.125rem', fontWeight: 'semibold', marginBottom: '1rem' }}>Assignments List</h2>
                 {assignments.length === 0 ? (
                     <p style={{ color: '#9CA3AF' }}>No assignments available for this subject.</p>
@@ -192,17 +189,17 @@ const AssignmentsPage = ({ username }) => {
                                         padding: '1rem',
                                         borderRadius: '0.5rem',
                                         boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-                                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                                        backgroundColor: 'rgba(255, 255, 255, 0.05)'
+                                        border: '1px solid rgba(0, 0, 0, 0.28)',
+                                        backgroundColor: 'rgba(213, 227, 232, 0.19)'
                                     }}
                                 >
-                                    <h3 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{assignment.title}</h3>
-                                    <p style={{ fontSize: '0.875rem', color: '#9CA3AF', marginBottom: '0.5rem' }}>
+                                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'gray' }}>{assignment.title}</h2><br/>
+                                    <p style={{ fontSize: '1.2rem', color: '#9CA3AF', marginBottom: '0.5rem' }}>
                                         <span style={{ fontWeight: 'medium' }}>Subject:</span> {subject ? subject.name : 'Unknown Subject'}
                                     </p>
-                                    <p style={{ color: '#D1D5DB', marginBottom: '0.5rem' }}>{assignment.description}</p>
+                                    <p style={{ color: '#D1D5DB', marginBottom: '1rem' }}>{assignment.description}</p>
                                     {assignment.dueDate && (
-                                        <p style={{ fontSize: '0.875rem', color: '#9CA3AF', marginBottom: '0.5rem' }}>
+                                        <p style={{ fontSize: '1.2rem', color: '#9CA3AF', marginBottom: '0.5rem' }}>
                                             <span style={{ fontWeight: 'medium' }}>Due Date:</span> {new Date(assignment.dueDate).toLocaleDateString()}
                                         </p>
                                     )}
@@ -215,7 +212,8 @@ const AssignmentsPage = ({ username }) => {
                                             padding: '0.5rem 1rem',
                                             borderRadius: '0.375rem',
                                             cursor: 'pointer',
-                                            transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out'
+                                            transition: 'background-color 0.2s ease-in-out, color 0.2s ease-in-out',
+                                            fontSize: '1rem'
                                         }}
                                     >
                                         Mark as Completed

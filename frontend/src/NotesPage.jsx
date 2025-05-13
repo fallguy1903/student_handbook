@@ -42,7 +42,7 @@ const NotesPage = ({ username }) => {
     <div id="notes-div">
       <h2>Notes</h2><br />
       <SubjectSelector onSelect={setSubjectId} /><br />
-      <input type="file" onChange={e => setFile(e.target.files[0])} /><br />
+      <input id='fileinput' type="file" onChange={e => setFile(e.target.files[0])} /><br />
       <button id="upload-button" onClick={uploadNote} disabled={!file || !subjectId}>Upload</button>
 
       <div style={{ marginTop: '20px' }}>
@@ -53,13 +53,14 @@ const NotesPage = ({ username }) => {
               border: '1px solid #ccc',
               borderRadius: '6px',
               padding: '12px',
-              marginBottom: '20px',
+              marginBottom: '35px',
               backgroundColor: 'white',
+              width:'55vw'
             }}
           >
-            <h4>{note.filename || "Untitled Document"}</h4><hr /><br />
-            <p>Uploaded by: <strong>{note.user}</strong></p>
-            <p>Date: {new Date(note.uploadedAt).toLocaleString()}</p><br />
+            <h3>{note.filename || "Untitled Document"}</h3><br />
+            <p style={{color:'gray', marginBottom:'10px'}}>Uploaded by: <strong>{note.user}</strong></p>
+            <p style={{color:'gray'}}>Date: {new Date(note.uploadedAt).toLocaleString()}</p><br />
             <div style={{ marginTop: '8px' }}>
               <a id="download" href={note.fileUrl} target="_blank" rel="noopener noreferrer" style={{ marginRight: '12px' }}>
                 Download

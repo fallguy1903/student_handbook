@@ -2,40 +2,51 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 0.5%;
+    min-height: 100vh;
+    background-image: url('../public/abstract.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-#assignment {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: black;        /* Nice green color */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    
-  }
-  
-  #assignment:hover {
-    background-color: gold;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
+#subname {
+  width: 100%;
+  padding: 1rem;              /* Increased padding */
+  font-size: 1rem;            /* Larger font */
+  border-radius: 0.5rem;
+  border: 1px solid #374151;
+  box-sizing: border-box;
+}
 
-  #note {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: black;        /* Nice green color */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    
-  }
-  
-  #note:hover {
-    background-color: gold;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
+#subname::placeholder {
+  font-size: 0.95rem;
+}
+
+/* Input focus styles */
+#subname:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Style the top navigation buttons */
+#assignment,
+#note {
+  width: 400px;              /* Makes buttons wider */
+  padding: 0.75rem 1rem;     /* Increases button height */
+  margin-right: 1rem;        /* Adds space between buttons */
+  font-size: 1rem;           /* Larger text */
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(49, 49, 57); /* Blue background */
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease-in-out;
+}
+
+#assignment:hover,
+#note:hover {
+  background-color: rgb(157, 148, 126); /* Darker blue on hover */
+}

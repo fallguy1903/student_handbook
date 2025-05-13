@@ -28,20 +28,20 @@ function NotesAndAssignments() {
 
   return (
     <div id="na-div">
-      <h1>Assignments & Notes</h1>
       <div>
         <button id="assignment" onClick={() => setPage('assignments')}>Assignments</button>
         <button id="note" onClick={() => setPage('notes')}>Notes</button>
       </div>
 
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: '20px', display:'flex', flexDirection:'row'}}>
         <input
+          id='subname'
           type="text"
           placeholder="Enter subject name"
           value={subjectName}
           onChange={(e) => setSubjectName(e.target.value)}
         />
-        <button onClick={handleCreateSubject}>Add Subject</button>
+        <button id="addsub" onClick={handleCreateSubject}>Add Subject</button>
         {message && <p>{message}</p>}
       </div>
 

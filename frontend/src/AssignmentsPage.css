@@ -1,15 +1,53 @@
+/* AssignmentsPage.css */
+
+/* Apply general styling */
+/* Make the whole assignments section wider and centered */
 #assignments-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 60vh;
-    min-width: 30vw;
+    max-width: 900px;        /* Or use 100% if you want full width */
+    width: 90%;              /* Responsive width */
+    margin: 2rem auto;       /* Center the box horizontally */
+    padding: 2rem;
+    background-color: white; /* Optional: background for visibility */
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
   
-    border: 2px solid #ccc;                         /* Border around the whole div */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /* Shadow for depth */
-    padding: 20px;                                   /* Space inside the border */
-    margin: 20px auto;                               /* Center horizontally if not full width */
-    width: fit-content;                              /* Shrink to fit content */
-    border-radius: 10px;                             /* Optional: rounded corners */
-    background-color: #f9f9f9;                       /* Optional: light background */
-}
+  
+  /* Make form inputs bigger and wider */
+  #title,
+  #dueDate,
+  #subject,
+  #description {
+    width: 100%;
+    padding: 1rem;              /* Increased padding */
+    font-size: 1rem;            /* Larger font */
+    border-radius: 0.5rem;
+    border: 1px solid #374151;
+    box-sizing: border-box;
+  }
+  
+  #title::placeholder,
+  #description::placeholder {
+    font-size: 0.95rem;
+  }
+  
+  /* Input focus styles */
+  #title:focus,
+  #dueDate:focus,
+  #subject:focus,
+  #description:focus {
+    outline: none;
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Buttons */
+  #createButton {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  #createButton:hover {
+    opacity: 0.9;
+  }
+  
+  

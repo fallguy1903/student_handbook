@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 60vh;
-    min-width: 30vw;
+    min-width: 60vw;
   
     border: 2px solid #ccc;                         /* Border around the whole div */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /* Shadow for depth */
@@ -11,10 +11,10 @@
     margin: 20px auto;                               /* Center horizontally if not full width */
     width: fit-content;                              /* Shrink to fit content */
     border-radius: 10px;                             /* Optional: rounded corners */
-    background-color: #f9f9f9;                       /* Optional: light background */
+    background-color: #fff;                       /* Optional: light background */
 }
 
-input[type="file"] {
+#fileinput {
     padding: 10px 14px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -23,22 +23,25 @@ input[type="file"] {
     background-color: #f9f9f9;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
+    width: 100%;
   }
   
-  input[type="file"]:hover {
+  #fileinput:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   #upload-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: tan;        /* Nice green color */
+    background-color: rgb(167, 218, 167);        /* Nice green color */
     color: white;
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    margin-bottom: 20px;
     
   }
   
@@ -52,6 +55,8 @@ input[type="file"] {
     cursor: not-allowed;
     box-shadow: none;
   }
+  
+
   
   #download {
     display: inline-block;

@@ -20,7 +20,8 @@ const SubjectSelector = ({ onSelect }) => {
         border: '1px solid #ccc',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         backgroundColor: '#f9f9f9',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width: '100%'
       }}
     >
       <option value="">Select Subject</option>
