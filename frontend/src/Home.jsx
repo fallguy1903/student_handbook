@@ -46,7 +46,7 @@ export default function Home() {
             <p>Notes & Assignments</p>
           </Link>
 
-          <Link to="#" className="grid-item">
+          <Link to="/timetable" className="grid-item">
             <div className="icon">🕒</div>
             <p>Time Table</p>
           </Link>

@@ -1,0 +1,89 @@
+/* Container Styling */
+.timetable-container {
+  padding: 30px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Title */
+.timetable-container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #343a40;
+  margin-bottom: 30px;
+}
+
+/* Table Styling */
+.timetable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header Row */
+.timetable th {
+  background-color: #343a40;
+  color: white;
+  padding: 12px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Regular Cells */
+.timetable td {
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* Day Name Column */
+.day-name {
+  font-weight: bold;
+  background-color: #f1f3f5;
+  color: #212529;
+}
+
+/* Hover Effect for Editable Cells */
+.editable-cell {
+  cursor: pointer;
+}
+
+.editable-cell:hover {
+  background-color: #f8f9fa;
+}
+
+/* Highlight Current Day */
+.highlight td {
+  background-color: #e0f7e9 !important;
+}
+
+/* Placeholder Text */
+.placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+/* Input Field for Editing */
+.cell-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.cell-input:focus {
+  border-color: #51cf66;
+  box-shadow: 0 0 0 2px rgba(81, 207, 102, 0.25);
+}

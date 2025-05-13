@@ -9,6 +9,7 @@ import Feedbacks from './Feedbacks';
 import Gpa_Calculator from './Gpa_Calculator';
 import Marks from './Marks';
 import NotesAndAssignments from './NotesAndAssignments';
+import TimeTable from './TimeTable';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Gpa_Calculator" element={<Gpa_Calculator />} />
         <Route path="/Marks" element={<Marks />}/>
         <Route path="/assignments" element={<NotesAndAssignments />}/>
+        <Route path="/timetable" element={<TimeTable />}/>
         </Routes>
     </Router>
   );
