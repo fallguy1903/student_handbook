@@ -24,7 +24,6 @@ export default function Feedback() {
 
     return (
         <div className="container">
-            <h1>Feedbacks</h1>
             <form onSubmit={handleLogin} className="form">
                 <input
                     type='text'
