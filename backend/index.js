@@ -11,6 +11,7 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const feedbackRoutes = require('./routes/feedback')
 const marksRoutes = require('./routes/mark');
+const timetableRoutes = require('./routes/timetable');
 
 const subjectRoutes = require('./routes/subjectRoutes');
 const assignmentRoutes = require('./routes/assignmentRoutes');
@@ -56,8 +57,9 @@ app.use((error, req, res, next) => {
 
 app.use(userRoutes);
 app.use(postRoutes);
-app.use(feedbackRoutes)
+app.use(feedbackRoutes);
 app.use(marksRoutes);
+app.use(timetableRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(result => {

@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="whole">
       <div className="home-container">
-        <h1 className="home-title">Welcome to Student Webbook</h1>
+        <h1 className="home-title">Student Webbook</h1>
         <div className="grid-container">
           <Link to="/post" className="grid-item">
             <div className="icon">📢</div>
@@ -36,10 +36,10 @@ export default function Home() {
             <p>Mark Details</p>
           </Link>
 
-          <Link to="#" className="grid-item">
+          {/* <Link to="#" className="grid-item">
             <div className="icon">👤</div>
             <p>Attendance</p>
-          </Link>
+          </Link> */}
 
           <Link to="/assignments" state={{ username: user?.username }} className="grid-item">
             <div className="icon">👨‍🏫</div>
