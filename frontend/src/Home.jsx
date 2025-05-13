@@ -38,7 +38,7 @@ export default function Home() {
 
           <Link to="#" className="grid-item">
             <div className="icon">👤</div>
-            <p>Dummy 1</p>
+            <p>Attendance</p>
           </Link>
 
           <Link to="/assignments" state={{ username: user?.username }} className="grid-item">
@@ -48,7 +48,7 @@ export default function Home() {
 
           <Link to="#" className="grid-item">
             <div className="icon">🕒</div>
-            <p>Dummy 3</p>
+            <p>Time Table</p>
           </Link>
         </div>
       </div>
